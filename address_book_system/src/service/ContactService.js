@@ -28,21 +28,27 @@ class ContactService {
   }
 
   viewByCityOrState(location) {
-    const result = this.addressBook.filter(contact => contact.city === location || contact.state === location);
-    return result;
-  }
-
-  searchByCityOrState(location) {
     return this.addressBook.filter(contact => contact.city === location || contact.state === location);
   }
 
   getNumberOfContacts() {
-    return this.addressBook.reduce((count) => count + 1, 0);
+    return this.addressBook.length;  // Directly use length property
+  }
+
+  getCountByCityOrState(location) {
+    const countByCity = this.addressBook.filter(contact => contact.city === location).length;
+    const countByState = this.addressBook.filter(contact => contact.state === location).length;
+    
+    return {
+      cityCount: countByCity,
+      stateCount: countByState
+    };
   }
 
   isDuplicate(contact) {
     return this.addressBook.some(existingContact => 
-      existingContact.firstName === contact.firstName && existingContact.lastName === contact.lastName
+      existingContact.firstName.toLowerCase().trim() === contact.firstName.toLowerCase().trim() &&
+      existingContact.lastName.toLowerCase().trim() === contact.lastName.toLowerCase().trim()
     );
   }
 }
