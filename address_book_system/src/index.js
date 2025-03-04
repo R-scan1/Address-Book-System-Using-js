@@ -1,17 +1,9 @@
+const ContactService = require('./service/ContactService');
 const Contact = require('./model/contact');
 
-let addressBook = [];
+let contactService = new ContactService();
 
-function addContact(firstName, lastName, address, city, state, zip, phone, email) {
-  try {
-    const contact = new Contact(firstName, lastName, address, city, state, zip, phone, email);
-    addressBook.push(contact);
-  } catch (error) {
-    console.log(error.message); 
-  }
-}
-
-addContact(
+contactService.addContact(
   'Raj', 
   'Scan', 
   '123 Main St', 
@@ -22,7 +14,7 @@ addContact(
   'raj.scan@example.com'
 );
 
-addContact(
+contactService.addContact(
   'Manish', 
   'Patel', 
   '456 Oak St', 
@@ -33,7 +25,7 @@ addContact(
   'manish.patel@example.com'
 );
 
-addContact(
+contactService.addContact(
   'Arpita', 
   'Goutam', 
   'Satna', 
@@ -44,8 +36,14 @@ addContact(
   'arpita.goutam@example.com'
 );
 
-console.log('Address Book:');
-addressBook.forEach(contact => {
+let searchResult = contactService.findContactByName('Arpita Goutam');
+console.log('Search Result for "Arpita Goutam":');
+console.log(searchResult);
+
+contactService.updateContact('Raj Scan', '123 New Main St', 'Newcity', 'Newstate', '54321', '321-654-9870', 'new.raj.scan@example.com');
+
+console.log('Updated Address Book:');
+contactService.getAllContacts().forEach(contact => {
   console.log(`Name: ${contact.firstName} ${contact.lastName}`);
   console.log(`Address: ${contact.address}, ${contact.city}, ${contact.state}, ${contact.zip}`);
   console.log(`Phone: ${contact.phone}`);
