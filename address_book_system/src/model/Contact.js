@@ -10,6 +10,10 @@ class Contact {
     this.email = this.validateEmail(email);
   }
 
+  toString() {
+    return `${this.firstName} ${this.lastName}, Address: ${this.address}, City: ${this.city}, State: ${this.state}, Zip: ${this.zip}, Phone: ${this.phone}, Email: ${this.email}`;
+  }
+
   validateName(name, field) {
     const namePattern = /^[A-Z][a-zA-Z]{2,}$/;
     if (!namePattern.test(name)) {

@@ -28,17 +28,17 @@ class ContactService {
   }
 
   viewByCityOrState(location) {
-    return this.addressBook.filter(contact => contact.city === location || contact.state === location);
+    const result = this.addressBook.filter(contact => contact.city === location || contact.state === location);
+    return result;
   }
 
   getNumberOfContacts() {
-    return this.addressBook.length;  // Directly use length property
+    return this.addressBook.reduce((count) => count + 1, 0);
   }
 
   getCountByCityOrState(location) {
     const countByCity = this.addressBook.filter(contact => contact.city === location).length;
     const countByState = this.addressBook.filter(contact => contact.state === location).length;
-    
     return {
       cityCount: countByCity,
       stateCount: countByState
@@ -47,9 +47,25 @@ class ContactService {
 
   isDuplicate(contact) {
     return this.addressBook.some(existingContact => 
-      existingContact.firstName.toLowerCase().trim() === contact.firstName.toLowerCase().trim() &&
-      existingContact.lastName.toLowerCase().trim() === contact.lastName.toLowerCase().trim()
+      existingContact.firstName === contact.firstName && existingContact.lastName === contact.lastName
     );
+  }
+
+  sortContactsByName() {
+    this.addressBook.sort((a, b) => {
+      const nameA = `${a.firstName} ${a.lastName}`.toLowerCase();
+      const nameB = `${b.firstName} ${b.lastName}`.toLowerCase();
+      if (nameA < nameB) return -1;
+      if (nameA > nameB) return 1;
+      return 0;
+    });
+  }
+
+  printSortedContacts() {
+    this.sortContactsByName();
+    this.addressBook.forEach(contact => {
+      console.log(contact.toString());
+    });
   }
 }
 
