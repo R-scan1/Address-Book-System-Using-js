@@ -2,7 +2,7 @@ const Contact = require('./model/contact');
 
 const contact1 = new Contact(
   'Raj', 
-  'S can', 
+  'Scan',
   '123 Main St', 
   'Anytown', 
   'Anystate', 
@@ -16,7 +16,7 @@ const contact2 = new Contact(
   'Patel', 
   'Bhopal', 
   'Rewa', 
-  '\Temp state', 
+  'Temp state', 
   '67890', 
   '987-654-3210', 
   'manish.patel@example.com'
