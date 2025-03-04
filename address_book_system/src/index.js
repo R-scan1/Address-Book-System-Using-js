@@ -1,4 +1,4 @@
-const ContactService = require('./service/ContactService');
+const ContactService = require('./service/contactService');
 const Contact = require('./model/contact');
 
 let contactService = new ContactService();
@@ -36,13 +36,18 @@ contactService.addContact(
   'arpita.goutam@example.com'
 );
 
-let searchResult = contactService.findContactByName('Arpita Goutam');
-console.log('Search Result for "Arpita Goutam":');
-console.log(searchResult);
+console.log('Address Book Before Deletion:');
+contactService.getAllContacts().forEach(contact => {
+  console.log(`Name: ${contact.firstName} ${contact.lastName}`);
+  console.log(`Address: ${contact.address}, ${contact.city}, ${contact.state}, ${contact.zip}`);
+  console.log(`Phone: ${contact.phone}`);
+  console.log(`Email: ${contact.email}`);
+  console.log("---------------------");
+});
 
-contactService.updateContact('Raj Scan', '123 New Main St', 'Newcity', 'Newstate', '54321', '321-654-9870', 'new.raj.scan@example.com');
+contactService.deleteContactByName('Raj Scan');
 
-console.log('Updated Address Book:');
+console.log('Address Book After Deletion:');
 contactService.getAllContacts().forEach(contact => {
   console.log(`Name: ${contact.firstName} ${contact.lastName}`);
   console.log(`Address: ${contact.address}, ${contact.city}, ${contact.state}, ${contact.zip}`);

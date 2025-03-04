@@ -1,4 +1,3 @@
-// service/contactService.js
 const Contact = require('../model/contact');
 
 class ContactService {
@@ -32,6 +31,16 @@ class ContactService {
       contact.zip = newZip;
       contact.phone = newPhone;
       contact.email = newEmail;
+    }
+  }
+
+  deleteContactByName(name) {
+    const index = this.addressBook.findIndex(contact => `${contact.firstName} ${contact.lastName}` === name);
+    if (index !== -1) {
+      this.addressBook.splice(index, 1);
+      console.log(`${name} has been deleted from the address book.`);
+    } else {
+      console.log(`${name} not found in the address book.`);
     }
   }
 }
