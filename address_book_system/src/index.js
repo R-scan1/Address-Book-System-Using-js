@@ -11,12 +11,24 @@ console.log('Contacts in Anytown:');
 console.log(contactService.viewByCityOrState('Anytown'));
 
 console.log('Searching for contacts in Bhopal:');
-console.log(contactService.viewByCityOrState('Bhopal'));
+console.log(contactService.searchByCityOrState('Bhopal'));
 
 const locationCount = contactService.getCountByCityOrState('Anytown');
 console.log(`Number of contacts in Anytown: ${locationCount.cityCount}`);
-console.log(`Number of contacts in Bhopal: ${locationCount.stateCount}`);
+console.log(`Number of contacts in Anystate: ${locationCount.stateCount}`);
 
 contactService.deleteContactByName('Raj Scan');
 console.log('After deletion:');
-console.log(contactService.viewByCityOrState('Bhopal'));
+console.log(contactService.viewByCityOrState('Anytown'));
+
+console.log('Contacts sorted by Name:');
+console.log(contactService.sortByName());
+
+console.log('Contacts sorted by City:');
+console.log(contactService.sortByCity());
+
+console.log('Contacts sorted by State:');
+console.log(contactService.sortByState());
+
+console.log('Contacts sorted by Zip:');
+console.log(contactService.sortByZip());

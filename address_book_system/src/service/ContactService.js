@@ -28,8 +28,11 @@ class ContactService {
   }
 
   viewByCityOrState(location) {
-    const result = this.addressBook.filter(contact => contact.city === location || contact.state === location);
-    return result;
+    return this.addressBook.filter(contact => contact.city === location || contact.state === location);
+  }
+
+  searchByCityOrState(location) {
+    return this.addressBook.filter(contact => contact.city === location || contact.state === location);
   }
 
   getNumberOfContacts() {
@@ -39,20 +42,11 @@ class ContactService {
   getCountByCityOrState(location) {
     const countByCity = this.addressBook.filter(contact => contact.city === location).length;
     const countByState = this.addressBook.filter(contact => contact.state === location).length;
-    return {
-      cityCount: countByCity,
-      stateCount: countByState
-    };
+    return { cityCount: countByCity, stateCount: countByState };
   }
 
-  isDuplicate(contact) {
-    return this.addressBook.some(existingContact => 
-      existingContact.firstName === contact.firstName && existingContact.lastName === contact.lastName
-    );
-  }
-
-  sortContactsByName() {
-    this.addressBook.sort((a, b) => {
+  sortByName() {
+    return this.addressBook.sort((a, b) => {
       const nameA = `${a.firstName} ${a.lastName}`.toLowerCase();
       const nameB = `${b.firstName} ${b.lastName}`.toLowerCase();
       if (nameA < nameB) return -1;
@@ -61,11 +55,22 @@ class ContactService {
     });
   }
 
-  printSortedContacts() {
-    this.sortContactsByName();
-    this.addressBook.forEach(contact => {
-      console.log(contact.toString());
-    });
+  sortByCity() {
+    return this.addressBook.sort((a, b) => a.city.localeCompare(b.city));
+  }
+
+  sortByState() {
+    return this.addressBook.sort((a, b) => a.state.localeCompare(b.state));
+  }
+
+  sortByZip() {
+    return this.addressBook.sort((a, b) => a.zip.localeCompare(b.zip));
+  }
+
+  isDuplicate(contact) {
+    return this.addressBook.some(existingContact => 
+      existingContact.firstName === contact.firstName && existingContact.lastName === contact.lastName
+    );
   }
 }
 
