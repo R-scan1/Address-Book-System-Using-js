@@ -36,7 +36,7 @@ contactService.addContact(
   'arpita.goutam@example.com'
 );
 
-console.log('Address Book Before Deletion:');
+console.log('Address Book:');
 contactService.getAllContacts().forEach(contact => {
   console.log(`Name: ${contact.firstName} ${contact.lastName}`);
   console.log(`Address: ${contact.address}, ${contact.city}, ${contact.state}, ${contact.zip}`);
@@ -45,13 +45,5 @@ contactService.getAllContacts().forEach(contact => {
   console.log("---------------------");
 });
 
-contactService.deleteContactByName('Raj Scan');
-
-console.log('Address Book After Deletion:');
-contactService.getAllContacts().forEach(contact => {
-  console.log(`Name: ${contact.firstName} ${contact.lastName}`);
-  console.log(`Address: ${contact.address}, ${contact.city}, ${contact.state}, ${contact.zip}`);
-  console.log(`Phone: ${contact.phone}`);
-  console.log(`Email: ${contact.email}`);
-  console.log("---------------------");
-});
+const numberOfContacts = contactService.countContacts();
+console.log(`Total number of contacts: ${numberOfContacts}`);

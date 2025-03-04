@@ -43,6 +43,10 @@ class ContactService {
       console.log(`${name} not found in the address book.`);
     }
   }
+
+  countContacts() {
+    return this.addressBook.reduce((count) => count + 1, 0); // Initial value is 0
+  }
 }
 
 module.exports = ContactService;
