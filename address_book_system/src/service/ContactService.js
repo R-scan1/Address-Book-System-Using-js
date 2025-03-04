@@ -6,11 +6,20 @@ class ContactService {
   }
 
   addContact(firstName, lastName, address, city, state, zip, phone, email) {
-    try {
-      const contact = new Contact(firstName, lastName, address, city, state, zip, phone, email);
-      this.addressBook.push(contact);
-    } catch (error) {
-      console.log(error.message);
+    const isDuplicate = this.addressBook.some(contact => 
+      `${contact.firstName} ${contact.lastName}` === `${firstName} ${lastName}`
+    );
+
+    if (isDuplicate) {
+      console.log(`Duplicate entry found for ${firstName} ${lastName}. Contact not added.`);
+    } else {
+      try {
+        const contact = new Contact(firstName, lastName, address, city, state, zip, phone, email);
+        this.addressBook.push(contact);
+        console.log(`Contact for ${firstName} ${lastName} added successfully.`);
+      } catch (error) {
+        console.log(error.message);
+      }
     }
   }
 

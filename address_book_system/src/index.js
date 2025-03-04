@@ -26,6 +26,17 @@ contactService.addContact(
 );
 
 contactService.addContact(
+  'Raj', 
+  'Scan', 
+  '123 Main St', 
+  'Anytown', 
+  'Anystate', 
+  '12345', 
+  '123-456-7890', 
+  'raj.scan@example.com'
+);
+
+contactService.addContact(
   'Arpita', 
   'Goutam', 
   'Satna', 
